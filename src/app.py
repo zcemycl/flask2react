@@ -3,7 +3,7 @@ from flask import Flask, request
 
 app = Flask(__name__)
 
-@app.route("/")
+@app.route("/",methods=['POST'])
 def home():
     return jsonpify({'output':'Hello World','data':[10,2,8,5,6,1]})
 
