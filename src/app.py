@@ -3,11 +3,14 @@ from flask import Flask, request, stream_with_context, Response, render_template
 from flask_cors import CORS
 import random
 from flask_socketio import SocketIO
-
+import eventlet
+eventlet.monkey_patch()
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret_key'
 CORS(app)
-socketio = SocketIO(app,cors_allowed_origins='*')
+socketio = SocketIO(app,logger=True,
+            engineio_logger=True,always_connect=True,
+            cors_allowed_origins='*')
 #CORS(socketio)
 
 @app.route("/")

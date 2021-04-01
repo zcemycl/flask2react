@@ -19,10 +19,15 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.min.js"></script>
   <script type="text/javascript">
     //var socket = io.connect('http://'+document.domain+':'+location.port);
-    var protocol = location.protocol;
+    var protocol = window.location.protocol;
+    if(protocol == "https:") {
+        var ws_scheme = "wss://";
+    } else {
+        var ws_scheme = "ws://"
+    };
     //var socket = io.connect('https://hidden-dusk-28735.herokuapp.com');
-
-    var socket = io.connect(protocol+'//'+document.domain+':'+location.port);
+    //var socket = io.connect(protocol+'//'+document.domain+':'+location.port);
+    var socket = io.connect(ws_scheme+location.host+'/session');
     //var socket = io();
 
     socket.on( 'connect', function() {
