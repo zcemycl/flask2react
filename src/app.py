@@ -5,6 +5,7 @@ import random
 from flask_socketio import SocketIO
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'secret_key'
 CORS(app)
 socketio = SocketIO(app,cors_allowed_origins='*')
 #CORS(socketio)
@@ -26,7 +27,7 @@ def sessions():
 def messageReceived(methods=['GET', 'POST']):
     print('message was received!!!')
 
-@socketio.on('my event')
+@socketio.on('my event',namespace='/session')
 def handle_my_custom_event(json, methods=['GET', 'POST']):
     print('received my event: ' + str(json))
     socketio.emit('my response', json, callback=messageReceived)
