@@ -20,7 +20,7 @@ def getdata():
     response = jsonpify({'output':'Hello Leo','data':data})
     return response
 
-@app.route("/session", methods=['POST'])
+@app.route("/session", methods=['GET','POST'])
 def session():
     return render_template('session.html')
 
