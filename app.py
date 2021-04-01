@@ -2,8 +2,14 @@ from flask_jsonpify import jsonpify
 from flask import Flask,request,stream_with_context,Response,render_template
 from flask_cors import CORS
 import random
+import time
+from threading import *
 from flask_socketio import SocketIO,send,emit
+import eventlet
+thread = Thread()
+thread_stop_event = Event()
 
+eventlet.monkey_patch()
 app = Flask(__name__)
 CORS(app)
 socketio = SocketIO(app)

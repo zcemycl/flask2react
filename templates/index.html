@@ -1,12 +1,23 @@
-<div id="chat"></div>
-<input id="chat-input" type="text"> <button onclick="sendMessage()">Send Message</button>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
-<script>
-	socket = io()
-	function sendMessage () {
-		socket.emit("my_event",document.getElementById("chat-input").value)
-	}
-	socket.on("my_response",(data)=>{
-		document.getElementById("chat").innerHTML+="<br>"+data;
-	})
-</script>
+<html>
+    <head></head>
+    <body>
+    <pre><div id="jsonholder"></div></pre>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+    <script type="text/javascript">
+        var socket = io.connect(location.protocol+'//'+document.domain+':'+location.port+'/test');
+        var numbers_received = [];
+        socket.on('newnumber',function(msg){
+            console.log(msg.number);
+            if (numbers_received.length >= 10){
+                numbers_received.shift()
+            }
+            numbers_received.push(msg.number);
+            document.getElementById('jsonholder').innerHTML = JSON.stringify({'data':numbers_received})
+            //document.getElementById('jsonholder').appendChild(msg.number);
+        });
+    </script>
+
+
+    </body>
+</html>
+
