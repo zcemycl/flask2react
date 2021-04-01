@@ -5,14 +5,14 @@
 </head>
 <body>
 
-  <h3 style='color: #ccc;font-size: 30px;'>No message yet..</h3>
+  <h3 id="initial" style='color: #ccc;font-size: 30px;'>No message yet..</h3>
   <div class="message_holder"></div>
 
-  <form action="" method="POST">
-    <input type="text" class="username" placeholder="User Name"/>
-    <input type="text" class="message" placeholder="Messages"/>
-    <input type="submit"/>
-  </form>
+  <!--<form action="" method="POST">-->
+    <input type="text" class="username" id="chatname" placeholder="User Name"/>
+    <input type="text" class="message" id="chatinput" placeholder="Messages"/>
+    <input type="submit" onclick="return sendMessage();"/>
+  <!--</form>-->
 
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>-->
@@ -23,29 +23,39 @@
     //var socket = io.connect(protocol+'//'+document.domain+':'+location.port);
     //var socket = io.connect(ws_scheme+location.host+'/session');
     var socket = io();
+    function sendMessage() {
+        socket.emit('my_event',{
+            'user_name':document.getElementById('chatname').value,
+            'message':document.getElementById('chatinput').value})
+    }
 
-    socket.on( 'connect', function() {
-      socket.emit( 'my event', {
-        data: 'User Connected'
-      } )
-      var form = $( 'form' ).on( 'submit', function( e ) {
-        e.preventDefault()
-        let user_name = $( 'input.username' ).val()
-        let user_input = $( 'input.message' ).val()
-        socket.emit( 'my event', {
-          user_name : user_name,
-          message : user_input
-        } )
-        $( 'input.message' ).val( '' ).focus()
-      } )
-    } )
-    socket.on( 'my response', function( msg ) {
-      console.log( msg )
-      if( typeof msg.user_name !== 'undefined' ) {
-        $( 'h3' ).remove()
-        $( 'div.message_holder' ).append( '<div><b style="color: #000">'+msg.user_name+'</b> '+msg.message+'</div>' )
-      }
+    socket.on( 'my_response', (msg)=>{
+        document.getElementById('initial').style.display = "none";
+        document.getElementsByClassName('message_holder')[0].innerHTML+='<div><b style="color: #000">'+msg.user_name+'</b> '+msg.message+'</div>';
     })
+
+//    socket.on( 'connect', function() {
+//      socket.emit( 'my event', {
+//        data: 'User Connected'
+//      } )
+//      var form = $( 'form' ).on( 'submit', function( e ) {
+//        e.preventDefault()
+//        let user_name = $( 'input.username' ).val()
+//        let user_input = $( 'input.message' ).val()
+//        socket.emit( 'my event', {
+//          user_name : user_name,
+//          message : user_input
+//        } )
+//        $( 'input.message' ).val( '' ).focus()
+//      } )
+//    } )
+//    socket.on( 'my response', function( msg ) {
+//      console.log( msg )
+//      if( typeof msg.user_name !== 'undefined' ) {
+//        $( 'h3' ).remove()
+//        $( 'div.message_holder' ).append( '<div><b style="color: #000">'+msg.user_name+'</b> '+msg.message+'</div>' )
+//      }
+//    })
   </script>
 
 </body>
