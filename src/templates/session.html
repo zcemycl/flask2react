@@ -19,7 +19,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>
   <script type="text/javascript">
     //var socket = io.connect('http://' + document.domain + ':' + location.port);
-    var socket = io.connect('https://hidden-dusk-28735.herokuapp.com');
+    var socket = io.connect('https://hidden-dusk-28735.herokuapp.com/session');
 
     socket.on( 'connect', function() {
       socket.emit( 'my event', {
