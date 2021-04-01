@@ -3,7 +3,7 @@ pytest
 flask-jsonpify
 gunicorn
 flask-cors
-flask-socketio==4.6.0
+flask-socketio<5.0.0
 gevent
 eventlet
 gevent-websocket
