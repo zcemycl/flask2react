@@ -4,3 +4,5 @@ flask-jsonpify
 gunicorn
 flask-cors
 flask-socketio
+gevent
+eventlet
