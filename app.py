@@ -10,9 +10,9 @@ socketio = SocketIO(app)
 
 @app.route("/")
 def home():
-#    return jsonpify({'output':'Hello World','data':[10,2,8,5,6,1]})
+    return jsonpify({'output':'Hello World','data':[10,2,8,5,6,1]})
 #    return render_template('session.html')
-    return render_template('index.html')
+#    return render_template('index.html')
 
 @app.route("/getdata",methods=['GET','POST'])
 def getdata():
