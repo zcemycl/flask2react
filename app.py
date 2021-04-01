@@ -12,7 +12,7 @@ thread = Thread()
 thread_stop_event = Event()
 app = Flask(__name__)
 CORS(app)
-socketio = SocketIO(app)
+socketio = SocketIO(app, cors_allowed_origins="*")
 
 class RandomThread(Thread):
     def __init__(self):
