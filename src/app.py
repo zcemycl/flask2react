@@ -6,8 +6,8 @@ from flask_socketio import SocketIO
 
 app = Flask(__name__)
 CORS(app)
-socketio = SocketIO(app)
-
+socketio = SocketIO(app,cors_allowed_origins='*')
+#CORS(socketio)
 
 @app.route("/")
 def home():
