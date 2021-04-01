@@ -1,1 +1,1 @@
-web: gunicorn --pythonpath src -k geventwebsocket.gunicorn.workers.GeventWebSocketWorker -w 1 app:app
+web: gunicorn --pythonpath src -k eventlet -w 1 app:app 
