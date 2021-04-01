@@ -5,7 +5,7 @@ import random
 from flask_socketio import SocketIO,send,emit
 
 app = Flask(__name__)
-CORS(app)
+#CORS(app)
 socketio = SocketIO(app)
 #CORS(socketio)
 
