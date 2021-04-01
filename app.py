@@ -16,7 +16,7 @@ socketio = SocketIO(app, cors_allowed_origins="*")
 
 class RandomThread(Thread):
     def __init__(self):
-        self.delay = 5
+        self.delay = 60
         super(RandomThread, self).__init__()
     def randomNumberGenerator(self):
         print("Making random numbers")
