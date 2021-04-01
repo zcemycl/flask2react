@@ -3,14 +3,11 @@ from flask import Flask, request, stream_with_context, Response, render_template
 from flask_cors import CORS
 import random
 from flask_socketio import SocketIO
-import eventlet
-eventlet.monkey_patch()
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret_key'
 CORS(app)
-socketio = SocketIO(app,logger=True,
-            engineio_logger=True,always_connect=True,
-            cors_allowed_origins='*')
+socketio = SocketIO(app)
 #CORS(socketio)
 
 @app.route("/")
@@ -23,8 +20,8 @@ def getdata():
     response = jsonpify({'output':'Hello Leo','data':data})
     return response
 
-@app.route("/session", methods=['GET', 'POST'])
-def sessions():
+@app.route("/session", methods=['POST'])
+def session():
     return render_template('session.html')
 
 def messageReceived(methods=['GET', 'POST']):
